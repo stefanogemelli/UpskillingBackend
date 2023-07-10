@@ -1,7 +1,14 @@
-const server = require("./src/server");
+const express = require("express");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
-const PORT = 8001;
+const app = express();
 
-server.listen(PORT, () => {
-  console.log(`Characters service listening on port ${PORT}`);
-});
+app.use(
+  "/characters",
+  createProxyMiddleware({
+    target: "http://localhost:8001",
+    changeOrigin: true,
+  })
+);
+
+app.listen(8000);
