@@ -3,7 +3,8 @@ const axios = require("axios");
 
 module.exports = {
   list: async () => {
-    return await axios.get("http://database:8004/Character");
+    const { data } = await axios.get("http://database:8004/Character");
+    return data;
   },
   create: async () => {
     throw Error("Hubo un error en la BD al crear el personaje");
